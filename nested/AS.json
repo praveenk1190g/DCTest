@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "createChildDomain": {
+      "type": "bool",
+      "metadata": {
+        "description": "Do you want a child domain? If false, the parameters for the child domain are ignored. "
+      },
+      "defaultValue": true
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources; takes its default from the Resource Group."
+      }
+    }
+  },
+  "variables": {
+    "adAvailabilitySetNameChild": "AvailSetChild"
+  },
+  "resources": [
+    {
+      "name": "[variables('adAvailabilitySetNameChild')]",
+      "type": "Microsoft.Compute/availabilitySets",
+      "apiVersion": "2018-06-01",
+      "condition": "[parameters('createChildDomain')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Aligned"
+      },
+      "properties": {
+        "PlatformUpdateDomainCount": 3,
+        "PlatformFaultDomainCount": 2
+      }
+    }
+  ],
+  "outputs": {}
+}
