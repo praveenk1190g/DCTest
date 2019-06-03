@@ -6,7 +6,19 @@
       "value": "GEN-UNIQUE"
     },
     "adminPassword": {
-      "value": "GEN-UNIQUE"
+      "value": "GEN-PASSWORD"
+    },
+    "secondResourceGroup": {
+      "value": "RG",
+      "metadata": {
+        "description": "Name for RG to which child DC will be deployed to"
+      }
+    },
+    "secondSubscriptionID": {
+      "value": "SUB-ID",
+      "metadata": {
+        "description": "Subscription ID to which child DC will be deployed to"
+      }
     }
   }
 }
