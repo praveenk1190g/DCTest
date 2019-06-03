@@ -268,7 +268,7 @@
       "name": "nestedTemplateForChildAvSet",
       "type": "Microsoft.Resources/deployments",
       "resourceGroup": "[parameters('secondResourceGroup')]",
-      "subscriptionId": "[parameters('secondSubscriptionID')]",
+      
       "properties": {
         "mode": "Incremental",
         "templateLink": {
