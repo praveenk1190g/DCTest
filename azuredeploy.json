@@ -430,7 +430,7 @@
       "name": "CreateADVM3",
       "type": "Microsoft.Resources/deployments",
       "resourceGroup": "[parameters('secondResourceGroup')]",
-      "subscriptionId": "[parameters('secondSubscriptionID')]",
+      
 
       "condition": "[parameters('createChildDomain')]",
       "apiVersion": "2018-08-01",
