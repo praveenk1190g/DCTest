@@ -340,7 +340,7 @@
       "apiVersion": "2018-08-01",
       "dependsOn": [
         "[resourceId('Microsoft.Resources/deployments','CreateVNET')]",
-        "[resourceId('Microsoft.Compute/availabilitySets', variables('adAvailabilitySetNameRoot'))]"
+        "[resourceId('Microsoft.Resources/deployments', 'nestedTemplateForChildAvSet')]"
       ],
       "properties": {
         "mode": "Incremental",
