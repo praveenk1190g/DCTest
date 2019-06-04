@@ -275,7 +275,7 @@
       "name": "nestedTemplateForChildAvSet",
       "type": "Microsoft.Resources/deployments",
       "resourceGroup": "[parameters('secondResourceGroup')]",
-      
+      "subscriptionId": "[parameters('secondSubscriptionID')]",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -437,8 +437,7 @@
       "name": "CreateADVM3",
       "type": "Microsoft.Resources/deployments",
       "resourceGroup": "[parameters('secondResourceGroup')]",
-      
-
+      "subscriptionId": "[parameters('secondSubscriptionID')]",
       "condition": "[parameters('createChildDomain')]",
       "apiVersion": "2018-08-01",
       "dependsOn": [
@@ -496,6 +495,7 @@
       "name": "CreateChildDomain",
       "type": "Microsoft.Resources/deployments",
       "resourceGroup": "[parameters('secondResourceGroup')]",
+      "subscriptionId": "[parameters('secondSubscriptionID')]",
       "apiVersion": "2018-08-01",
       "condition": "[parameters('createChildDomain')]",
       "dependsOn": [
