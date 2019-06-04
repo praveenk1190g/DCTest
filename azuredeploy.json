@@ -477,6 +477,10 @@
           },
           "location": {
             "value": "[parameters('location')]"
+          },
+          "virtualNetworkResourceGroup": {
+            "value": "[parameters('secondResourceGroup')]"
+
           }
         }
       }
@@ -672,6 +676,10 @@
           },
           "location": {
             "value": "East US"
+          },
+          "virtualNetworkResourceGroup": {
+            "value": "[parameters('secondResourceGroup')]"
+
           }
         }
       }
