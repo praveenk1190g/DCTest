@@ -685,7 +685,7 @@
             "value": "East US"
           },
           "virtualNetworkResourceGroup": {
-            "value": "[parameters('secondResourceGroup')]"
+            "value": "[parameters('firstResourceGroup')]"
 
           }
         }
