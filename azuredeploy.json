@@ -15,6 +15,13 @@
         "description": "Name for RG to which child DC will be deployed to"
       }
     },
+    "firstResourceGroup": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().name]",
+      "metadata": {
+        "description": "Name for RG to which child DC will be deployed to"
+      }
+    },
     "secondSubscriptionID": {
       "type": "string",
       "metadata": {
@@ -479,7 +486,7 @@
             "value": "[parameters('location')]"
           },
           "virtualNetworkResourceGroup": {
-            "value": "[parameters('secondResourceGroup')]"
+            "value": "[parameters('firstResourceGroup')]"
 
           }
         }
