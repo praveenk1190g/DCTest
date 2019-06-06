@@ -504,7 +504,8 @@
       "condition": "[parameters('createChildDomain')]",
       "apiVersion": "2018-08-01",
       "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments','CreateChildVNET')]",
+        //"[resourceId('Microsoft.Resources/deployments','CreateChildVNET')]",
+        "Microsoft.Resources/deployments/CreateChildVNET",
         "Microsoft.Resources/deployments/nestedTemplateForChildAvSet"
       ],
       "properties": {
@@ -702,7 +703,8 @@
       "apiVersion": "2018-08-01",
       "condition": "[and(parameters('createSecondDc'), parameters('createChildDomain'))]",
       "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments','CreateChildVNET')]",
+        //"[resourceId('Microsoft.Resources/deployments','CreateChildVNET')]",
+        "Microsoft.Resources/deployments/CreateChildVNET",
         "Microsoft.Resources/deployments/nestedTemplateForChildAvSet"
       ],
       "properties": {
