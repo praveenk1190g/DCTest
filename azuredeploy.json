@@ -233,7 +233,7 @@
       "metadata": {
         "description": "The IP address of the first DC of the CHILD domain."
       },
-      "defaultValue": "10.0.0.6"
+      "defaultValue": "10.1.0.6"
     },
     "ChildDC4Name": {
       "type": "string",
@@ -249,7 +249,7 @@
       "metadata": {
         "description": "The IP address of the second DC of the CHILD domain."
       },
-      "defaultValue": "10.0.0.7"
+      "defaultValue": "10.1.0.7"
     },
     "location": {
       "type": "string",
@@ -504,7 +504,7 @@
       "condition": "[parameters('createChildDomain')]",
       "apiVersion": "2018-08-01",
       "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments','CreateVNET')]",
+        "[resourceId('Microsoft.Resources/deployments','CreateChildVNET')]",
         "Microsoft.Resources/deployments/nestedTemplateForChildAvSet"
       ],
       "properties": {
@@ -702,7 +702,7 @@
       "apiVersion": "2018-08-01",
       "condition": "[and(parameters('createSecondDc'), parameters('createChildDomain'))]",
       "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments','CreateVNET')]",
+        "[resourceId('Microsoft.Resources/deployments','CreateChildVNET')]",
         "Microsoft.Resources/deployments/nestedTemplateForChildAvSet"
       ],
       "properties": {
@@ -713,10 +713,10 @@
         },
         "parameters": {
           "virtualNetworkName": {
-            "value": "[parameters('virtualNetworkName')]"
+            "value": "[parameters('virtualNetworkNameChild')]"
           },
           "subnetName": {
-            "value": "[parameters('adSubnetName')]"
+            "value": "[parameters('adSubnetNameChild')]"
           },
           "adAvailabilitySetName": {
             "value": "[variables('adAvailabilitySetNameChild')]"
