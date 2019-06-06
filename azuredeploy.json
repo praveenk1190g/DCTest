@@ -132,6 +132,22 @@
       },
       "defaultValue": "10.0.0.0/22"
     },
+    "virtualNetworkNameChild": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the new VNET for the DC(s)."
+      },
+      "defaultValue": "childAdVNET",
+      "minLength": 2,
+      "maxLength": 16
+    },
+    "virtualNetworkAddressRangeChild": {
+      "type": "string",
+      "metadata": {
+        "description": "The address range of the new VNET in CIDR format."
+      },
+      "defaultValue": "10.1.0.0/22"
+    },
     "externalDNSForwarder": {
       "type": "string",
       "metadata": {
@@ -154,6 +170,22 @@
         "description": "The address range of the subnet created in the new VNET."
       },
       "defaultValue": "10.0.0.0/24"
+    },
+    "adSubnetNameChild": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the VM subnet created in the new VNET."
+      },
+      "defaultValue": "childAdSubnet",
+      "minLength": 2,
+      "maxLength": 16
+    },
+    "adSubnetChild": {
+      "type": "string",
+      "metadata": {
+        "description": "The address range of the subnet created in the new VNET."
+      },
+      "defaultValue": "10.1.0.0/24"
     },
     "RootDC1Name": {
       "type": "string",
@@ -316,6 +348,37 @@
       }
     },
     {
+      "name": "CreateChildVNET",
+      "type": "Microsoft.Resources/deployments",
+      "resourceGroup": "[parameters('secondResourceGroup')]",
+      "subscriptionId": "[parameters('secondSubscriptionID')]",
+      "apiVersion": "2018-08-01",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('vnetTemplateUri')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "virtualNetworkName": {
+            "value": "[parameters('virtualNetworkNameChild')]"
+          },
+          "virtualNetworkAddressRange": {
+            "value": "[parameters('virtualNetworkAddressRangeChild')]"
+          },
+          "subnetName": {
+            "value": "[parameters('adSubnetNameChild')]"
+          },
+          "subnetRange": {
+            "value": "[parameters('adSubnetChild')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          }
+        }
+      }
+    },
+    {
       "type": "Microsoft.Network/networkSecurityGroups",
       "name": "[variables('adNSGName')]",
       "apiVersion": "2018-08-01",
@@ -452,10 +515,10 @@
         },
         "parameters": {
           "virtualNetworkName": {
-            "value": "[parameters('virtualNetworkName')]"
+            "value": "[parameters('virtualNetworkNameChild')]"
           },
           "subnetName": {
-            "value": "[parameters('adSubnetName')]"
+            "value": "[parameters('adSubnetNameChild')]"
           },
           "adAvailabilitySetName": {
             "value": "[variables('adAvailabilitySetNameChild')]"
@@ -483,11 +546,8 @@
           },
           "location": {
             "value": "[parameters('location')]"
-          },
-          "virtualNetworkResourceGroup": {
-            "value": "[parameters('firstResourceGroup')]"
-
           }
+          
         }
       }
     },
