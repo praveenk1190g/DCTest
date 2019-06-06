@@ -82,19 +82,12 @@
       "metadata": {
         "description": "Location for all resources."
       }
-    },
-    "virtualNetworkResourceGroup": {
-      "type": "string",
-      "defaultValue": "[resourceGroup().name]",
-      "metadata": {
-        "description": "Resource group where vnet resides."
-      }
     }
   },
   "variables": {
-    "vnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-    "adSubnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('SubnetName'))]",
-    //"adSubnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets/', parameters('virtualNetworkName'),parameters('SubnetName'))]",
+    //"vnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    //"adSubnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('SubnetName'))]",
+    "adSubnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets/', parameters('virtualNetworkName'),parameters('SubnetName'))]",
     "vmPublicIPName": "[concat(parameters('vmName'),'PublicIP')]",
     "vmNicName": "[concat(parameters('vmName'),'Nic')]",
     "vmDataDisk": "[concat(parameters('vmName'),'-managed-DataDisk1')]",
